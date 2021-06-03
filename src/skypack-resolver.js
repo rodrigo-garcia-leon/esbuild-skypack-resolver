@@ -1,10 +1,8 @@
-import fetch from "node-fetch";
 import { getDependencies } from "./dependencies.js";
+import { getUrl } from "./service.js";
 
 const PACKAGE_LOCK_FILE = `${process.cwd()}/package-lock.json`;
 const PACKAGE_ID_REGEX = /^@?(([a-z0-9]+-?)+\/?)+$/;
-const MINIFIED_URL_REGEX = /Minified: (.+)/m;
-const CDN_HOST = "https://cdn.skypack.dev";
 
 export function skypackResolver({ packageLockFile = PACKAGE_LOCK_FILE } = {}) {
   const pending = {};
@@ -34,10 +32,7 @@ export function skypackResolver({ packageLockFile = PACKAGE_LOCK_FILE } = {}) {
         })();
 
         const version = dependencies[path];
-        const body = await (
-          await fetch(`${CDN_HOST}/${path}@${version}`)
-        ).text();
-        const [, url] = body.match(MINIFIED_URL_REGEX);
+        const url = await getUrl(path, version);
 
         cache[path] = url;
         pending[path].resolve();
