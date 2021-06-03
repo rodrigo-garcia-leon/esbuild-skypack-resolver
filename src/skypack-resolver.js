@@ -6,14 +6,14 @@ const PACKAGE_ID_REGEX = /^@?(([a-z0-9]+-?)+\/?)+$/;
 const MINIFIED_URL_REGEX = /Minified: (.+)/m;
 const CDN_HOST = "https://cdn.skypack.dev";
 
-export function skypackResolver({ dependencies: userDependencies } = {}) {
+export function skypackResolver({ packageLockFile = PACKAGE_LOCK_FILE } = {}) {
   const pending = {};
   const cache = {};
 
   return {
     name: "skypack-resolver",
     async setup(build) {
-      const dependencies = userDependencies || (await getDependencies(PACKAGE_LOCK_FILE));
+      const dependencies = await getDependencies(packageLockFile);
 
       build.onResolve({ filter: PACKAGE_ID_REGEX }, async ({ path }) => {
         if (pending[path]) {

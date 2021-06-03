@@ -3,7 +3,6 @@ import { join, dirname } from "path";
 import { expect } from "chai";
 import { describe } from "mocha";
 import { build } from "esbuild";
-import { getDependencies } from "../src/dependencies.js";
 import { skypackResolver } from "../index.js";
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
@@ -16,16 +15,16 @@ render(html\`<p>Hello World!</p>\`, div);
 
 describe("skypackResolver", async function () {
   it("ok", async function () {
-    const file = join(__dirname, "./example/package-lock.json");
-    const dependencies = await getDependencies(file);
+    const entryPoint = join(__dirname, "./example/index.js");
     const outfile = join(__dirname, "./example/dist/index.js");
+    const packageLockFile = join(__dirname, "./example/package-lock.json");
 
     await build({
-      entryPoints: [join(__dirname, "./example/index.js")],
+      entryPoints: [entryPoint],
       outfile,
       format: "esm",
       bundle: true,
-      plugins: [skypackResolver({ dependencies })],
+      plugins: [skypackResolver({ packageLockFile })],
     });
     const code = await (await readFile(outfile)).toString();
 
