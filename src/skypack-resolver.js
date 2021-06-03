@@ -1,16 +1,20 @@
 import fetch from "node-fetch";
+import { getDependencies } from "./dependencies.js";
 
+const PACKAGE_LOCK_FILE = `${process.cwd()}/package-lock.json`;
 const PACKAGE_ID_REGEX = /^@?(([a-z0-9]+-?)+\/?)+$/;
 const MINIFIED_URL_REGEX = /Minified: (.+)/m;
 const CDN_HOST = "https://cdn.skypack.dev";
 
-export function skypackResolver({ dependencies }) {
+export function skypackResolver({ dependencies: userDependencies } = {}) {
   const pending = {};
   const cache = {};
 
   return {
     name: "skypack-resolver",
-    setup(build) {
+    async setup(build) {
+      const dependencies = userDependencies || (await getDependencies(PACKAGE_LOCK_FILE));
+
       build.onResolve({ filter: PACKAGE_ID_REGEX }, async ({ path }) => {
         if (pending[path]) {
           await pending[path].promise;
