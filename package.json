@@ -2,9 +2,10 @@
   "name": "esbuild-skypack-resolver",
   "version": "1.0.0",
   "description": "esbuild-skypack-resolver",
+  "type": "module",
   "module": "index.js",
   "scripts": {
-    "test": "mocha --require esm"
+    "test": "mocha"
   },
   "keywords": [
     "esbuild",
@@ -19,7 +20,6 @@
   "devDependencies": {
     "chai": "^4.3.4",
     "esbuild": "^0.12.5",
-    "esm": "^3.2.25",
     "mocha": "^8.4.0"
   }
 }

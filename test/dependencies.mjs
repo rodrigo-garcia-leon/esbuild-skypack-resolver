@@ -1,7 +1,9 @@
-import { join } from "path";
+import { join, dirname } from "path";
 import { expect } from "chai";
 import { describe } from "mocha";
 import { getDependencies } from "../src/dependencies.js";
+
+const __dirname = dirname(new URL(import.meta.url).pathname);
 
 const DEPENDENCIES = {
   "@lit/reactive-element": "1.0.0-rc.2",
