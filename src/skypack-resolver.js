@@ -1,5 +1,6 @@
 import { getDependencies } from "./dependencies.js";
-import { getUrl } from "./service.js";
+import { service } from "./service.js";
+import { newPendingPromise } from "./util.js";
 
 const PACKAGE_LOCK_FILE = `${process.cwd()}/package-lock.json`;
 const PACKAGE_ID_REGEX = /^@?(([a-z0-9]+-?)+\/?)+$/;
@@ -22,17 +23,10 @@ export function skypackResolver({ packageLockFile = PACKAGE_LOCK_FILE } = {}) {
           return { path: cache[path], external: true };
         }
 
-        pending[path] = (function () {
-          let resolve;
-          const promise = new Promise((_resolve) => {
-            resolve = _resolve;
-          });
-
-          return { promise, resolve };
-        })();
+        pending[path] = newPendingPromise();
 
         const version = dependencies[path];
-        const url = await getUrl(path, version);
+        const url = await service.getUrl(path, version);
 
         cache[path] = url;
         pending[path].resolve();
