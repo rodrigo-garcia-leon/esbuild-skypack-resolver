@@ -10,7 +10,8 @@
     "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
     "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:typescript": "tsc",
+    "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:typescript",
     "format": "npm run format:eslint && npm run format:prettier"
   },
   "keywords": [
@@ -26,13 +27,18 @@
   "devDependencies": {
     "@open-wc/eslint-config": "^4.3.0",
     "@open-wc/prettier-config": "^1.1.0",
+    "@types/mocha": "^8.2.2",
+    "@types/node-fetch": "^2.5.10",
+    "@types/sinon": "^10.0.2",
     "chai": "^4.3.4",
     "esbuild": "^0.12.5",
     "eslint": "^7.27.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
+    "lit-html": "^1.4.1",
     "mocha": "^8.4.0",
-    "sinon": "^11.1.1"
+    "sinon": "^11.1.1",
+    "typescript": "^4.3.2"
   },
   "eslintConfig": {
     "extends": [

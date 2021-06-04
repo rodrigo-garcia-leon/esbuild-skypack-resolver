@@ -38,7 +38,7 @@ describe("skypack-resolver", async function () {
         outfile: outfile,
         format: "esm",
         bundle: true,
-        plugins: [skypackResolver({ packageLockFile })],
+        plugins: [skypackResolver(packageLockFile)],
       });
       const code = await (await readFile(outfile)).toString();
 

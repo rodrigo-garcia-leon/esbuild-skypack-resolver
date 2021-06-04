@@ -1,11 +1,11 @@
 import { inspect } from "util";
 import { expect } from "chai";
-import { newPendingPromise } from "../src/util.js";
+import { newPromiseResolve } from "../src/util.js";
 
 describe("util", function () {
-  describe("newPendingPromise", function () {
+  describe("newPromiseResolve", function () {
     it("ok", async function () {
-      const { promise, resolve } = newPendingPromise();
+      const { promise, resolve } = newPromiseResolve();
 
       expect(inspect(promise)).to.equal("Promise { <pending> }");
 
