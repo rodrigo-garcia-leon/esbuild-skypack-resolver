@@ -1,11 +1,11 @@
 import { join, dirname } from "path";
 import { expect } from "chai";
 import { describe } from "mocha";
-import { getDependencies } from "../src/dependencies.js";
+import { getDependencies } from "../src/package.js";
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
 
-describe("dependencies", function () {
+describe("package", function () {
   describe("getDependencies", function () {
     it("ok", async function () {
       const file = join(__dirname, "./example/package-lock.json");

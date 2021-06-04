@@ -1,5 +1,5 @@
-import { getDependencies } from "./dependencies.js";
-import { service } from "./service.js";
+import { getDependencies } from "./package.js";
+import { cdn } from "./cdn.js";
 import { newPendingPromise } from "./util.js";
 
 const PACKAGE_LOCK_FILE = `${process.cwd()}/package-lock.json`;
@@ -26,7 +26,7 @@ export function skypackResolver({ packageLockFile = PACKAGE_LOCK_FILE } = {}) {
         pending[path] = newPendingPromise();
 
         const version = dependencies[path];
-        const url = await service.getUrl(path, version);
+        const url = await cdn.getUrl(path, version);
 
         cache[path] = url;
         pending[path].resolve();

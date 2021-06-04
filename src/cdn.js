@@ -10,6 +10,6 @@ async function getUrl(id, version) {
   return url;
 }
 
-export const service = {
+export const cdn = {
   getUrl,
 };

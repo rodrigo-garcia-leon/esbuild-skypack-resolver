@@ -5,7 +5,7 @@ import { describe } from "mocha";
 import sinon from "sinon";
 import { build } from "esbuild";
 import { skypackResolver } from "../index.js";
-import { service } from "../src/service.js";
+import { cdn } from "../src/cdn.js";
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
 const { stub } = sinon;
@@ -25,7 +25,7 @@ render(template_default, div);
 describe("skypack-resolver", async function () {
   describe("skypackResolver", async function () {
     it("ok", async function () {
-      const getUrlStub = stub(service, "getUrl").returns(
+      const getUrlStub = stub(cdn, "getUrl").returns(
         "https://cdn.skypack.dev/pin/lit-html@v2.0.0-rc.3-mF2EKOQ7ge0WnKTCrvCT/mode=imports,min/optimized/lit-html.js"
       );
 
