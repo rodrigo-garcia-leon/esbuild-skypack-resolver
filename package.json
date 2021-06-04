@@ -52,5 +52,9 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rodrigo-garcia-leon/esbuild-skypack-resolver.git"
   }
 }
