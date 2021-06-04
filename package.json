@@ -1,7 +1,7 @@
 {
   "name": "esbuild-skypack-resolver",
   "version": "1.0.6",
-  "description": "esbuild-skypack-resolver",
+  "description": "A plugin to resolve package names to Skypack CDN URLs",
   "type": "module",
   "module": "index.js",
   "scripts": {
