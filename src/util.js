@@ -1,6 +1,6 @@
 export function newPendingPromise() {
   let resolve;
-  const promise = new Promise((_resolve) => {
+  const promise = new Promise(_resolve => {
     resolve = _resolve;
   });
 

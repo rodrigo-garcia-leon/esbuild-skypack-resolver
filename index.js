@@ -1,1 +1,1 @@
-export { skypackResolver } from "./src/skypack-resolver.js";
+export { skypackResolver } from './src/skypack-resolver.js';

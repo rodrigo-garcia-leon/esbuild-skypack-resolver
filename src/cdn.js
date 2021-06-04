@@ -1,7 +1,7 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 const MINIFIED_URL_REGEX = /Minified: (.+)/m;
-const CDN_HOST = "https://cdn.skypack.dev";
+const CDN_HOST = 'https://cdn.skypack.dev';
 
 async function getUrl(id, version) {
   const body = await (await fetch(`${CDN_HOST}/${id}@${version}`)).text();

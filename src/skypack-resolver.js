@@ -1,6 +1,6 @@
-import { getDependencies } from "./package.js";
-import { cdn } from "./cdn.js";
-import { newPendingPromise } from "./util.js";
+import { getDependencies } from './package.js';
+import { cdn } from './cdn.js';
+import { newPendingPromise } from './util.js';
 
 const PACKAGE_LOCK_FILE = `${process.cwd()}/package-lock.json`;
 const PACKAGE_ID_REGEX = /^@?(([a-z0-9]+-?)+\/?)+$/;
@@ -10,7 +10,7 @@ export function skypackResolver({ packageLockFile = PACKAGE_LOCK_FILE } = {}) {
   const cache = {};
 
   return {
-    name: "skypack-resolver",
+    name: 'skypack-resolver',
     async setup(build) {
       const dependencies = await getDependencies(packageLockFile);
 

@@ -5,7 +5,13 @@
   "type": "module",
   "module": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
+    "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
+    "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier"
   },
   "keywords": [
     "esbuild",
@@ -18,9 +24,33 @@
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
+    "@open-wc/eslint-config": "^4.3.0",
+    "@open-wc/prettier-config": "^1.1.0",
     "chai": "^4.3.4",
     "esbuild": "^0.12.5",
+    "eslint": "^7.27.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
     "mocha": "^8.4.0",
     "sinon": "^11.1.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config",
+      "eslint-config-prettier"
+    ]
+  },
+  "prettier": "@open-wc/prettier-config",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }
