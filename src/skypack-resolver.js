@@ -7,6 +7,7 @@ const PACKAGE_ID_REGEX = /^@?(([a-z0-9]+-?)+\/?)+$/;
 
 /**
  * Creates new Skypack resolver plugin
+ * 
  * @param {string} packageLockFile The package lock file to get dependencies from
  * @returns {import("esbuild").Plugin}
  */
