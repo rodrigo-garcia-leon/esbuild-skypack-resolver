@@ -3,8 +3,12 @@
   "version": "1.0.7",
   "description": "A plugin to resolve package names to Skypack CDN URLs",
   "type": "module",
-  "module": "index.js",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  },
   "scripts": {
+    "build": "./script/build.js",
     "test": "mocha",
     "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
     "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",

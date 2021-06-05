@@ -27,6 +27,15 @@ jobs:
         run: npm run test
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build
+        run: npm run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: esbuild-skypack-resolver
+          path: .
   deploy:
     name: Deploy
     needs: build
@@ -34,6 +43,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: esbuild-skypack-resolver
+          path: .
       - name: Publish NPM
         run: npm publish
         env:
