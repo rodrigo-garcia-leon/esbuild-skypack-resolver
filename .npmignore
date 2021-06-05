@@ -1,2 +1,7 @@
-.github
+script
+src
 test
+
+.github
+.nvmrc
+tsconfig.json

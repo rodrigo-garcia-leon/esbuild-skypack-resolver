@@ -1,7 +1,8 @@
 import { join, dirname } from "path";
 import { expect } from "chai";
 import { describe } from "mocha";
-import { getDependencies } from "../src/package.js";
+// @ts-ignore
+import { getDependencies } from "../src/package.ts";
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
 

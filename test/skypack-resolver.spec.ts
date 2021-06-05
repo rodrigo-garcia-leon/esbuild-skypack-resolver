@@ -4,8 +4,10 @@ import { expect } from "chai";
 import { describe } from "mocha";
 import sinon from "sinon";
 import { build } from "esbuild";
-import { skypackResolver } from "../index.js";
-import { cdn } from "../src/cdn.js";
+// @ts-ignore
+import { skypackResolver } from "../index.ts";
+// @ts-ignore
+import { cdn } from "../src/cdn.ts";
 
 const __dirname = dirname(new URL(import.meta.url).pathname);
 const { stub } = sinon;

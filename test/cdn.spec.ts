@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { describe } from "mocha";
-import { cdn } from "../src/cdn.js";
+// @ts-ignore
+import { cdn } from "../src/cdn.ts";
 
 describe("cdn", function () {
   describe("getUrl", function () {

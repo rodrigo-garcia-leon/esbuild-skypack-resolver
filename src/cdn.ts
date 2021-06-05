@@ -5,12 +5,8 @@ const CDN_HOST = 'https://cdn.skypack.dev';
 
 /**
  * Gets Skypack pinned URL for package id and version
- *
- * @param {string} id The package id
- * @param {string} version The package version
- * @returns {Promise<string>}
  */
-async function getUrl(id, version) {
+async function getUrl(id: string, version: string) {
   const body = await (await fetch(`${CDN_HOST}/${id}@${version}`)).text();
   const matches = body.match(MINIFIED_URL_REGEX);
 

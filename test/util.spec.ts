@@ -1,6 +1,7 @@
 import { inspect } from "util";
 import { expect } from "chai";
-import { newPromiseResolve } from "../src/util.js";
+// @ts-ignore
+import { newPromiseResolve } from "../src/util.ts";
 
 describe("util", function () {
   describe("newPromiseResolve", function () {

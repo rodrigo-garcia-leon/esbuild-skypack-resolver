@@ -1,9 +1,7 @@
-#!/usr/bin/env node
-
-import { build } from 'esbuild'; // eslint-disable-line
+import { build, BuildOptions } from 'esbuild'; // eslint-disable-line
 
 const COMMON_OPTIONS = {
-  entryPoints: ['index.js'],
+  entryPoints: ['index.ts'],
   bundle: true,
   minify: true,
   external: ['fs'],
@@ -25,7 +23,7 @@ const OUTPUT_FORMATS = [
 async function run() {
   await Promise.all(
     OUTPUT_FORMATS.map(outputFormat => ({ ...outputFormat, ...COMMON_OPTIONS })).map(options =>
-      build(options),
+      build(options as BuildOptions),
     ),
   );
 }

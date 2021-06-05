@@ -1,28 +1,35 @@
-import { getDependencies } from './package.js';
-import { cdn } from './cdn.js';
-import { newPromiseResolve } from './util.js';
+// @ts-ignore
+import { getDependencies } from './package.ts';
+// @ts-ignore
+import { cdn } from './cdn.ts';
+// @ts-ignore
+import { newPromiseResolve, PromiseResolve } from './util.ts';
+import { OnResolveResult, Plugin, PluginBuild } from 'esbuild';
 
 const PACKAGE_LOCK_FILE = `${process.cwd()}/package-lock.json`;
 const PACKAGE_ID_REGEX = /^@?(([a-z0-9]+-?)+\/?)+$/;
 
+interface Pending {
+  [path: string]: PromiseResolve
+}
+
+interface Cache {
+  [path: string]: string
+}
+
 /**
  * Creates new Skypack resolver plugin
- *
- * @param {string} packageLockFile The package lock file to get dependencies from
- * @returns {import("esbuild").Plugin}
  */
-export function skypackResolver(packageLockFile = PACKAGE_LOCK_FILE) {
-  /** @type {Object.<string, import("./util.js").PromiseResolve>} */
-  const pending = {};
-  /** @type {Object.<string, string>} */
-  const cache = {};
+export function skypackResolver(packageLockFile = PACKAGE_LOCK_FILE): Plugin {
+  const pending: Pending  = {};
+  const cache: Cache = {};
 
   return {
     name: 'skypack-resolver',
-    async setup(build) {
+    async setup(build: PluginBuild) {
       const dependencies = await getDependencies(packageLockFile);
 
-      build.onResolve({ filter: PACKAGE_ID_REGEX }, async ({ path }) => {
+      build.onResolve({ filter: PACKAGE_ID_REGEX }, async ({ path }): Promise<OnResolveResult> => {
         if (pending[path]) {
           await pending[path].promise;
         }
