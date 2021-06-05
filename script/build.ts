@@ -1,11 +1,11 @@
 import { build, BuildOptions } from 'esbuild'; // eslint-disable-line
 
-const COMMON_OPTIONS = {
+const COMMON_OPTIONS: BuildOptions = {
   entryPoints: ['index.ts'],
   bundle: true,
-  minify: true,
   external: ['fs'],
   sourcemap: 'external',
+  platform: 'node'
 };
 
 const OUTPUT_FORMATS = [
