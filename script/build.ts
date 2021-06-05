@@ -5,7 +5,9 @@ const COMMON_OPTIONS: BuildOptions = {
   bundle: true,
   external: ['fs'],
   sourcemap: 'external',
-  platform: 'node'
+  target: 'node14',
+  platform: 'node',
+  mainFields: ['module', 'main']
 };
 
 const OUTPUT_FORMATS = [

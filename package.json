@@ -3,6 +3,8 @@
   "version": "1.0.10",
   "description": "A plugin to resolve package names to Skypack CDN URLs",
   "type": "module",
+  "main": "./dist.index.cjs",
+  "module": "./dist/index.mjs",
   "exports": {
     "import": "./dist/index.mjs",
     "require": "./dist/index.cjs"
