@@ -1,88 +1,101 @@
 {
-  "name": "esbuild-skypack-resolver",
-  "version": "1.0.11",
-  "description": "A plugin to resolve package names to Skypack CDN URLs",
-  "type": "module",
-  "main": "./dist.index.cjs",
-  "module": "./dist/index.mjs",
-  "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
-  },
-  "scripts": {
-    "build": "node --loader ts-node/esm ./script/build.ts",
-    "test": "mocha",
-    "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
-    "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
-    "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
-    "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "lint:typescript": "tsc",
-    "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:typescript",
-    "format": "npm run format:eslint && npm run format:prettier"
-  },
-  "keywords": [
-    "esbuild",
-    "skypack",
-    "resolver"
-  ],
-  "author": "Rodrigo García <yo@rodrigogarcia.me>",
-  "license": "MIT",
-  "dependencies": {
-    "node-fetch": "^2.6.1"
-  },
-  "devDependencies": {
-    "@open-wc/eslint-config": "^4.3.0",
-    "@open-wc/prettier-config": "^1.1.0",
-    "@types/chai": "^4.2.18",
-    "@types/mocha": "^8.2.2",
-    "@types/node-fetch": "^2.5.10",
-    "@types/sinon": "^10.0.2",
-    "chai": "^4.3.4",
-    "esbuild": "^0.12.5",
-    "eslint": "^7.27.0",
-    "esm": "^3.2.25",
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
-    "lit-html": "^1.4.1",
-    "mocha": "^8.4.0",
-    "sinon": "^11.1.1",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.3.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@open-wc/eslint-config",
-      "eslint-config-prettier"
-    ]
-  },
-  "prettier": "@open-wc/prettier-config",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rodrigo-garcia-leon/esbuild-skypack-resolver.git"
-  },
-  "engines": {
-    "node": ">=14.17.0"
-  },
-  "mocha": {
-    "require": "ts-node/register",
-    "loader": "ts-node/esm",
-    "extensions": [
-      "ts"
+    "name": "esbuild-skypack-resolver",
+    "version": "1.0.11",
+    "description": "A plugin to resolve package names to Skypack CDN URLs",
+    "type": "module",
+    "main": "./dist.index.cjs",
+    "module": "./dist/index.mjs",
+    "exports": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
+    },
+    "scripts": {
+        "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:typescript",
+        "lint:eslint": "eslint --ext .ts, . --ignore-path .gitignore",
+        "lint:prettier": "prettier \"**/*.ts\" --check --ignore-path .gitignore",
+        "lint:typescript": "tsc",
+        "format": "npm run format:eslint && npm run format:prettier",
+        "format:eslint": "eslint --ext .ts, . --fix --ignore-path .gitignore",
+        "format:prettier": "prettier \"**/*.ts\" --write --ignore-path .gitignore",
+        "test": "mocha",
+        "build": "node --loader ts-node/esm ./script/build.ts"
+    },
+    "keywords": [
+        "resolver",
+        "cdn",
+        "skypack",
+        "esbuild",
+        "esbuild-plugin"
     ],
-    "spec": [
-      "test/**/*.spec.ts"
-    ]
-  }
+    "author": "Rodrigo García <yo@rodrigogarcia.me>",
+    "license": "MIT",
+    "dependencies": {
+        "node-fetch": "^2.6.1"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.2.18",
+        "@types/mocha": "^8.2.2",
+        "@types/node-fetch": "^2.5.10",
+        "@types/sinon": "^10.0.2",
+        "@typescript-eslint/eslint-plugin": "^4.26.0",
+        "@typescript-eslint/parser": "^4.26.0",
+        "chai": "^4.3.4",
+        "esbuild": "^0.12.5",
+        "eslint": "^7.28.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "husky": "^6.0.0",
+        "lint-staged": "^11.0.0",
+        "mocha": "^8.4.0",
+        "prettier": "^2.3.1",
+        "sinon": "^11.1.1",
+        "ts-node": "^10.0.0",
+        "typescript": "^4.3.2"
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "extends": [
+            "plugin:@typescript-eslint/recommended",
+            "plugin:prettier/recommended"
+        ],
+        "rules": {
+            "@typescript-eslint/ban-ts-comment": 0
+        }
+    },
+    "prettier": {
+        "semi": true,
+        "trailingComma": "all",
+        "singleQuote": true,
+        "printWidth": 120,
+        "tabWidth": 4
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint --fix",
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rodrigo-garcia-leon/esbuild-skypack-resolver.git"
+    },
+    "engines": {
+        "node": ">=14.17.0"
+    },
+    "mocha": {
+        "require": "ts-node/register",
+        "loader": "ts-node/esm",
+        "extensions": [
+            "ts"
+        ],
+        "spec": [
+            "test/**/*.spec.ts"
+        ]
+    }
 }

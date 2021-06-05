@@ -1,19 +1,19 @@
-import { inspect } from "util";
-import { expect } from "chai";
+import { inspect } from 'util';
+import { expect } from 'chai';
 // @ts-ignore
-import { newPromiseResolve } from "../src/util.ts";
+import { newPromiseResolve } from '../src/util.ts';
 
-describe("util", function () {
-  describe("newPromiseResolve", function () {
-    it("ok", async function () {
-      const { promise, resolve } = newPromiseResolve();
+describe('util', function () {
+    describe('newPromiseResolve', function () {
+        it('ok', async function () {
+            const { promise, resolve } = newPromiseResolve();
 
-      expect(inspect(promise)).to.equal("Promise { <pending> }");
+            expect(inspect(promise)).to.equal('Promise { <pending> }');
 
-      resolve("fulfilled");
-      await promise;
+            resolve('fulfilled');
+            await promise;
 
-      expect(inspect(promise)).to.equal("Promise { 'fulfilled' }");
+            expect(inspect(promise)).to.equal("Promise { 'fulfilled' }");
+        });
     });
-  });
 });
